@@ -56,6 +56,7 @@ class ParteDiarioCrear(BaseModel):
 @app.get("/")
 def read_root():
     return {"status": "ok", "message": "API de Control de Obra activa"}
+    
 @app.get("/api/v1/partes-diarios")
 def listar_partes_diarios(db: Session = Depends(get_db)):
     partes = db.query(models.ParteDiarioModel).all()
