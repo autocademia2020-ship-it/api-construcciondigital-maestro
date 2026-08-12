@@ -1,9 +1,15 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# Cadena de conexión con comillas y sin corchetes en la contraseña
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres.rvruadjhosplxjzyruca:2354MonteVIdeo43@aws-0-sa-east-1.pooler.supabase.com:6543/postgres"
+# Lee la variable de entorno configurada en Render (Neon)
+SQLALCHEMY_DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL")
+
+# Si no encuentra la variable de entorno (por si pruebas localmente), usa None
+if not SQLALCHEMY_DATABASE_URL:
+    raise ValueError("La variable de entorno SQLALCHEMY_DATABASE_URL no está configurada")
+
 # Motor de conexión
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
